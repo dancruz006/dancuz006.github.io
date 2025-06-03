@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Bailes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #201c1c;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: rgb(184, 150, 150);
+        }
+
+        /* Contenedor de la cuadrícula */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 200px);
+            gap: 10px;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Cada cuadrado */
+        .grid-item {
+            background-color: rgb(192, 188, 133);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            border: 2px solid rgb(63, 59, 59);
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .grid-item:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        /* Video player */
+        #videoPlayer {
+            margin-top: 30px;
+            width: 80%;
+            max-width: 800px;
+            height: 450px;
+            background-color: rgb(255, 249, 249);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>
+        PRECEDENTES DE BAILES FOLKLÓRICOS BOLIVIANOS
+    </h1>
+
+    <div class="grid-container">
+        <!-- Cada cuadro con su video correspondiente -->
+        <div class="grid-item" data-video="videos/tinku.mp4">Tinku</div>
+        <div class="grid-item" data-video="videos/caporal.mp4">Caporal</div>
+        <div class="grid-item" data-video="videos/pujllay.mp4">Pujllay</div>
+        <div class="grid-item" data-video="videos/tobas.mp4">Tobas</div>
+    </div>
+
+    <!-- Reproductor de video -->
+    <video id="videoPlayer" controls>
+        <source src="" type="video/mp4" />
+        Tu navegador no soporta la reproducción de videos.
+    </video>
+
+    <script>
+        const items = document.querySelectorAll('.grid-item');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const source = videoPlayer.querySelector('source');
+
+        // Añadir evento a cada cuadro
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                const videoSrc = item.getAttribute('data-video');
+                source.setAttribute('src', videoSrc);
+                videoPlayer.load(); // Cargar el nuevo video
+                videoPlayer.play(); // Reproducir automáticamente
+            });
+        });
+    </script>
+
+</body>
+</html>
